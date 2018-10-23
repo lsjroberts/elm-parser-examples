@@ -121,8 +121,7 @@ reportParser =
 stationParser : Parser String
 stationParser =
     getChompedString <|
-        succeed identity
-            |= chompWhile Char.isAlpha
+        chompWhile Char.isAlpha
 
 
 timeParser : Parser Time
@@ -141,7 +140,7 @@ windInfoParser =
             WindInfo dir (toMPS unit speed) maybeGust
         )
         |= Parser.map toInt (numbers 3)
-        |= Parser.map toInt (oneOf [ numbers 2, numbers 3 ])
+        |= Parser.map toInt (oneOf [ backtrackable (numbers 3), numbers 2 ])
         |= oneOf [ Parser.map String.toInt gustParser, succeed Nothing ]
         |= oneOf
             [ Parser.map (\_ -> "KT") (token "KT")
@@ -153,7 +152,7 @@ gustParser : Parser String
 gustParser =
     succeed identity
         |. token "G"
-        |= oneOf [ numbers 2, numbers 3 ]
+        |= oneOf [ backtrackable (numbers 3), numbers 2 ]
 
 
 remainderParser : Parser String

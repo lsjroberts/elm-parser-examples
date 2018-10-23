@@ -136,5 +136,19 @@ remainderParser =
     succeed "remainder"
 
 
+
+---
+
+
 toInt =
     Maybe.withDefault 0 << String.toInt
+
+
+toMPS : String -> Int -> Int
+toMPS unit speed =
+    case unit of
+        "KT" ->
+            speed // 2
+
+        _ ->
+            speed
