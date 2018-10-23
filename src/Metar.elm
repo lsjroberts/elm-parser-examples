@@ -14,7 +14,7 @@ import Parser.Extra exposing (..)
 
 
 metar =
-    "EGLL 232120Z 29004KT 260V320 9999 NCD 14/10 Q1030 NOSIG"
+    "EGLL 232120Z 09014KT 260V320 9999 NCD 14/10 Q1030 NOSIG"
 
 
 type alias Report =
