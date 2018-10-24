@@ -28,7 +28,7 @@ update msg model =
 
 view model =
     layout [] <|
-        el [ centerX, centerY, Font.size 24 ]
+        el [ centerX, centerY, Font.size 36 ]
             (viewWindSpeed "09014KT")
 
 
@@ -37,7 +37,7 @@ view model =
 
 
 viewWindSpeed windInfo =
-    case windSpeedWithRegex windInfo of
+    case windSpeedWithString windInfo of
         Just speed ->
             text (String.fromInt speed)
 
@@ -57,7 +57,9 @@ windSpeedWithString windInfo =
             String.dropLeft 3 windInfo
     in
     -- Remove the "knots" unit and read the number
-    speed |> String.dropRight (String.length speed - 2) |> String.toInt
+    speed
+        |> String.dropRight (String.length speed - 2)
+        |> String.toInt
 
 
 
